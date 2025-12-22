@@ -1,0 +1,95 @@
+# Ophthalmic Image Registration - Default Configuration
+# =====================================================
+# This file contains default parameters for the registration pipeline.
+# These can be overridden programmatically or via custom config files.
+
+# Preprocessing Configuration
+preprocessing:
+  steps:
+    - grayscale
+    - clahe
+    - gaussian_blur
+  
+  # CLAHE parameters
+  clahe:
+    clip_limit: 2.0
+    tile_size: [8, 8]
+  
+  # Smoothing parameters
+  gaussian_sigma: 0.5
+  median_kernel_size: 3
+  bilateral:
+    d: 9
+    sigma_color: 75.0
+    sigma_space: 75.0
+  
+  # Vessel enhancement
+  vessel_enhancement:
+    sigma_range: [1.0, 3.0, 0.5]  # min, max, step
+  
+  # Unsharp mask
+  unsharp:
+    amount: 1.0
+    sigma: 1.0
+
+# Registration Configuration
+registration:
+  # Motion model: translation, euclidean, affine, homography
+  motion_model: affine
+  
+  # Enable/disable stages
+  use_coarse_alignment: true
+  use_fine_alignment: true
+  
+  # SIFT parameters (coarse alignment)
+  sift:
+    n_features: 5000
+    n_octave_layers: 3
+    contrast_threshold: 0.04
+    edge_threshold: 10
+  
+  # Feature matching
+  matching:
+    ratio_threshold: 0.75  # Lowe's ratio test
+    use_flann: true
+  
+  # RANSAC parameters
+  ransac:
+    reproj_threshold: 5.0
+    max_iterations: 2000
+    confidence: 0.995
+  
+  # ECC parameters (fine alignment)
+  ecc:
+    max_iterations: 1000
+    epsilon: 1.0e-6
+    gauss_filt_size: 5
+  
+  # Validation thresholds
+  validation:
+    min_matches_required: 10
+    validate_transform: true
+    max_translation_pixels: 500.0
+    max_rotation_degrees: 45.0
+    max_scale_change: 0.5
+
+# Visualization Configuration
+visualization:
+  colormap: viridis
+  figure_dpi: 150
+  default_comparison_mode: side_by_side
+
+# Export Configuration
+export:
+  image_format: .png
+  create_dirs: true
+  save_originals: false
+  save_overlay: true
+  save_difference: true
+
+# Logging Configuration
+logging:
+  level: INFO
+  console_output: true
+  use_colors: true
+  log_to_file: false

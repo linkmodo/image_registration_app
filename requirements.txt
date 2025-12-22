@@ -1,0 +1,32 @@
+# Ophthalmic Image Registration - Dependencies
+# Core scientific computing
+numpy>=1.21.0
+scipy>=1.7.0
+
+# Image processing
+opencv-python>=4.5.0
+opencv-contrib-python>=4.5.0
+Pillow>=9.0.0
+
+# Medical imaging
+pydicom>=2.3.0
+
+# Visualization
+matplotlib>=3.5.0
+
+# GUI Framework
+PyQt6>=6.4.0
+PyQt6-Qt6>=6.4.0
+
+# Optional: Medical imaging registration (SimpleITK/Elastix)
+SimpleITK>=2.2.0
+
+# Optional: Deep learning for multi-modality registration
+# torch>=2.0.0
+# torchvision>=0.15.0
+# kornia>=0.7.0
+# Install LightGlue separately: pip install git+https://github.com/cvg/LightGlue.git
+
+# Utilities
+dataclasses-json>=0.5.0
+typing-extensions>=4.0.0
