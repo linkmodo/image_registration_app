@@ -97,7 +97,9 @@ def setup_logging(
         console_handler = logging.StreamHandler(sys.stdout)
         console_handler.setLevel(level)
         
-        if use_colors and sys.stdout.isatty():
+        # Check if stdout is available and is a tty (for PyInstaller compatibility)
+        is_tty = hasattr(sys.stdout, 'isatty') and sys.stdout is not None and sys.stdout.isatty()
+        if use_colors and is_tty:
             formatter = ColoredFormatter(CONSOLE_FORMAT, use_colors=True)
         else:
             formatter = logging.Formatter(CONSOLE_FORMAT)
